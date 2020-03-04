@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+	<form action="/addauthorform" method='post'>
+		{% csrf_token %}
+		<h3>Add a Author</h3><br>
+		First Name: <input type="text" name="first_name"><br>
+		Last Name: <input type="text" name="last_name"><br>
+		Notes: <input type="text" name="notes"><br>
+		<input type="submit" value="Add">
+	</form><br>
+	<table class="table table-boardered table-hover table-responsive">
+		<thead>
+			<tr class="bg-dark text-light">
+				<th>ID</th>
+				<th>Title</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for each_author in author %}
+			<!-- эта функция копирует список -->
+			<tr>
+				<td>{{each_author.first_name}} {{each_author.last_name}}</td>
+				
+				<!-- переходит на страницу book -->
+				<td><a href="author/{{each_author.id}}">View</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+</body>
+
+</html>

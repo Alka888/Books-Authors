@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+
+<body>
+	<h1>{{author.title}}</h1>
+	<h5>ID: {{author.id}}</h5>
+	<p>Notes:</p> <b>{{author.description}}</b>
+
+	<p>Books: </p>
+	<ul>
+		{% for eachauth in authorsofbook %}
+		<li>
+			{{ eachauth.first_name}} {{ eachauth.last_name}}
+		</li>
+		{% endfor %}
+	</ul>
+	<form  action="/add_book_to_author/{{this_author.id}}" method="POST">
+		{% csrf_token %}
+		<select name="book_id">
+				{% for each_book in book %}
+			<option value={{book.id}}">{{book.title}}</option>
+			{% endfor %}
+		</select>
+		<input type="hidden" name="ebookid" value="{{books.id}}">
+		<input type="submit" value="Add Book">
+	</form>
+
+</body>
+
+</html>
